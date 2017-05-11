@@ -40,5 +40,4 @@ function displayStats() {
 	$('#js-averagewordlength').append(averageLengthOfWords)
 }
 
-
 $(doEvaluation);
