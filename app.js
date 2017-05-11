@@ -12,6 +12,9 @@ function doEvaluation() {
 		wordCountAll = wordArray.length;
 		wordCountUnique = uniqueWords();
 		averageLengthOfWords = averageLength();
+		displayStats();
+		return false;
+
 	})
 }
 
@@ -28,5 +31,14 @@ function averageLength() {
 	var withoutSpace = textToEvaluate.replace(/ /g,"");
 	return (withoutSpace.length)/wordCountAll;
 }
+
+// Display stats
+function displayStats() {
+	$('dl').removeClass("hidden");
+	$('#js-wordcount').append(wordCountAll);
+	$('#js-uniquewordcount').append(wordCountUnique);
+	$('#js-averagewordlength').append(averageLengthOfWords)
+}
+
 
 $(doEvaluation);
