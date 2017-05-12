@@ -1,16 +1,19 @@
-var wordArray = [];
 var textToEvaluate;
 var wordCountAll;
 var wordCountUnique;
-var wordArrayUnique = [];
 var averageLengthOfWords;
+const $submitButton = $('#submitButton');
+const $textArea = $('#textArea');
+const $jsWordcount = $('#js-wordcount')
+const $jsUniqueWordCount = $('#js-uniquewordcount');
+const $jsAverageWordLength = $('#js-averagewordlength');
 
 function doEvaluation() {
-	$('#submitButton').click(function() {
-		textToEvaluate = $('#textArea').val();
-		wordArray = textToEvaluate.split(" ");
+	$submitButton.click(function() {
+		textToEvaluate = $textArea.val();
+		let wordArray = textToEvaluate.split(" ");
 		wordCountAll = wordArray.length;
-		wordCountUnique = uniqueWords();
+		wordCountUnique = uniqueWords(wordArray);
 		averageLengthOfWords = averageLength();
 		displayStats();
 		return false;
@@ -19,7 +22,8 @@ function doEvaluation() {
 }
 
 // Creates unique word array and counts words
-function uniqueWords() {
+function uniqueWords(wordArray) {
+	let wordArrayUnique = [];
 	$.each(wordArray, function(i, el) {
 		if ($.inArray(el, wordArrayUnique) === -1) wordArrayUnique.push(el);
 	})
@@ -35,9 +39,9 @@ function averageLength() {
 // Display stats
 function displayStats() {
 	$('dl').removeClass("hidden");
-	$('#js-wordcount').append(wordCountAll);
-	$('#js-uniquewordcount').append(wordCountUnique);
-	$('#js-averagewordlength').append(averageLengthOfWords)
+	$jsWordcount.html(wordCountAll);
+	$jsUniqueWordCount.html(wordCountUnique);
+	$jsAverageWordLength.html(averageLengthOfWords)
 }
 
-$(doEvaluation);
+doEvaluation();
